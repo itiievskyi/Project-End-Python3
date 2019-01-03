@@ -1,5 +1,7 @@
 # Project End Planner (Python3)
 
+### The program has two versions: for shell and Jupyter Notebook: read instructions get more info about how to use them
+
 ### What is this project about?
 It's about predicting the end date of the project based on some conditions:
 * You have a start date of your project
@@ -8,25 +10,31 @@ It's about predicting the end date of the project based on some conditions:
 * All tasks can be done at the same time
 * Developers work 8 hours per day and only from Monday to Friday. Of course, they don't work on public holidays.
 
-**You just input the required data - and get the result:**
+**You just input the required data - and get the result (shell version):**
 
 ![image #1](/images/1.png)
 
-**or**
+**or (Jupyter version):**
 
 ![gif #1](/images/screen.gif)
 
 ### How to (for *nix systems):
 1. **Install**
-   * `git clone https://github.com/itiievskyi/Project-End-Python3.git ~/project-end/`
-   * `cd ~/project-end/`
-   * `pip3 install -r requirements.txt`
+    * `git clone https://github.com/itiievskyi/Project-End-Python3.git ~/project-end/`
+    * `cd ~/project-end/`
+    * `pip3 install -r requirements.txt` (for shell version)
+    * `pip3 install -r requirements-jupyter.txt` (for Jupyter version)
 
 2. **Use**
-   * `python3 project_end.py`
-   * Answer the questions and use on-screen instructions for navigating
-
-*For Windows OS you should probably use another path and commands depend on virtual environment you have*
+    * Shell version:
+        * `python3 project_end.py`
+        * Answer the questions and use on-screen instructions for navigating
+    * Jupyter version:
+        * `jupyter notebook Project-End.ipynb` or
+        * `jupyter notebook` and open **Project-End.ipynb** through the Jupyter Notebook menu (for Jupyter version)
+        ![image #4](/images/4.png)
+        * Go to **Cell** -> **Run All** and scroll to the bottom of the page
+        * Adjust parameteres to get the result you need
 
 ### Main questions
    * **Starting date of project** - type the date when you're going to start the project (or when it started). Use only `YYYY-MM-DD` notation so if the projects starts on January, 20th 2019, type 2019-01-20. This date will be the first day when developers work on project (in case if it's not a holiday and doesn't fall on weekend).
@@ -49,7 +57,9 @@ In many countries, if the holiday falls on weekend, it will observe the next wor
 In the core of the project are:
 * Python 3
 * [Holidays](https://pypi.org/project/holidays/) package
-* [Questionary](https://github.com/tmbo/questionary) package
+* [Questionary](https://github.com/tmbo/questionary) package for shell version
+* [Jupyter Notebook](https://jupyter.org/index.html) environment for Jupyter version
+* [ipywidgets](https://ipywidgets.readthedocs.io/en/stable/index.html) package for Jupyter version
 
 ### Why using package instead of API?
 I discovered a few popular APIs for getting national holidays and found the next problems with them:
@@ -104,9 +114,11 @@ United States      |US      |state = AL, AK, AS, AZ, AR, CA, CO, CT, DE, DC, FL,
 Wales              |        |None
 
 ### Interface
-To provide a dialog with the user I implemented nice CLI library: [Questionary](https://github.com/tmbo/questionary).
+To provide a dialog with the user I implemented nice CLI library for shell version: [Questionary](https://github.com/tmbo/questionary).
 It allows to use different types of questions ('text', 'confirm', 'checkbox', etc.) and returns inputted data.
 It's very similar to [PyInquirer](https://github.com/CITGuru/PyInquirer/) library but uses the latest version of promt-toolkit (I have 2.0.7) while PyInquirer now can work only with 1.0.1x versions. Using PyInquirer could cause some problems with another software like Jupyter that also uses the latest promt-toolkit staff. 
+
+The Jupyter version uses Jupyter notebook environment instead and provides interacting via **ipywidgets** library.
 
 ### Error management
 The program uses a try/except system to catch the most part of possible errors (they usually occur during input).
