@@ -334,6 +334,7 @@ def main():
         setup['observe']
     )
 
+    print(f'Developers need {proj_days} working day(s) to finish the job.')
     print(f'The estimated end date of the project is: {end_date["date"]}.')
     print(f'There will be {end_date["weekends"]} weekend day(s) and',
           f'{end_date["holidays"]} holiday(s) during the working period.')
