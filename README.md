@@ -8,8 +8,13 @@ It's about predicting the end date of the project based on some conditions:
 * All tasks can be done at the same time
 * Developers work 8 hours per day and only from Monday to Friday. Of course, they don't work on public holidays.
 
-You just input the required data - and get the result:
+**You just input the required data - and get the result:**
+
 ![image #1](/images/1.png)
+
+**or**
+
+![gif #1](/images/screen.gif)
 
 ### How to (for *nix systems):
 1. **Install**
