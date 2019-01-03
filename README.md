@@ -1,7 +1,7 @@
 # Project End Planner (Python3)
-
+***
 ### The program has two versions: for shell and Jupyter Notebook: read instructions get more info about how to use them
-
+***
 ### What is this project about?
 It's about predicting the end date of the project based on some conditions:
 * You have a start date of your project
@@ -17,7 +17,7 @@ It's about predicting the end date of the project based on some conditions:
 **or (Jupyter version):**
 
 ![gif #1](/images/screen.gif)
-
+***
 ### How to (for *nix systems):
 1. **Install**
     * `git clone https://github.com/itiievskyi/Project-End-Python3.git ~/project-end/`
@@ -35,24 +35,24 @@ It's about predicting the end date of the project based on some conditions:
         ![image #4](/images/4.png)
         * Go to **Cell** -> **Run All** and scroll to the bottom of the page
         * Adjust parameteres to get the result you need
-
+***
 ### Main questions
    * **Starting date of project** - type the date when you're going to start the project (or when it started). Use only `YYYY-MM-DD` notation so if the projects starts on January, 20th 2019, type 2019-01-20. This date will be the first day when developers work on project (in case if it's not a holiday and doesn't fall on weekend).
    * **Number of front-end developers** - the number of developers that will work on this project (assuming that nobody will leave or meet the team).
    * **Hours required for front-end tasks** - estimated amount of hours required in order to finish all front-end tasks. This number should represent the overall hours (regardless of the number of developers).
    * **Number of back-end developers** , **Hours required for back-end tasks** - see the previos instructions.
    * **Select a country where the company operates** - use the arrow keys and Enter to choose the country for which public holidays should be found. Look at the table below to see the full list of supported countries. 
-
+***
 ### Choosing a province or state
 Depend on country you have chosen the program can also propose you to choose a state or province.
 ![image #2](/images/2.png)
 If you pressed 'Y' but no longer want to choose, just pick the '-NONE-' to pass a default value to the main algorithm. Default value may be either the exact province or the whole country without special regional holidays. Look at the table below to see the full list of supported provinces.
-
+***
 ### Holiday observation
 In many countries, if the holiday falls on weekend, it will observe the next working day (it's usually Monday). But if you don't want to use this option (maybe your corporate rules provide another rule for this case) just type 'n' when the question about observation (*'Should holidays falling on weekend observe the next working day?'*) appears.
-
+***
 ## Developer notes
-
+***
 ### What technologies or libraries does this project use?
 In the core of the project are:
 * Python 3
@@ -60,7 +60,7 @@ In the core of the project are:
 * [Questionary](https://github.com/tmbo/questionary) package for shell version
 * [Jupyter Notebook](https://jupyter.org/index.html) environment for Jupyter version
 * [ipywidgets](https://ipywidgets.readthedocs.io/en/stable/index.html) package for Jupyter version
-
+***
 ### Why using package instead of API?
 I discovered a few popular APIs for getting national holidays and found the next problems with them:
 * All extended functions are available only in paid plans
@@ -112,19 +112,19 @@ Ukraine            |UA      |None
 United Kingdom     |UK      |None
 United States      |US      |state = AL, AK, AS, AZ, AR, CA, CO, CT, DE, DC, FL, GA, GU, HI, ID, IL, IN, IA, KS, KY, LA, ME, MD, MH, MA, MI, FM, MN, MS, MO, MT, NE, NV, NH, NJ, NM, NY, NC, ND, MP, OH, OK, OR, PW, PA, PR, RI, SC, SD, TN, TX, UT, VT, VA, VI, WA, WV, WI, WY
 Wales              |        |None
-
+***
 ### Interface
 To provide a dialog with the user I implemented nice CLI library for shell version: [Questionary](https://github.com/tmbo/questionary).
 It allows to use different types of questions ('text', 'confirm', 'checkbox', etc.) and returns inputted data.
 It's very similar to [PyInquirer](https://github.com/CITGuru/PyInquirer/) library but uses the latest version of promt-toolkit (I have 2.0.7) while PyInquirer now can work only with 1.0.1x versions. Using PyInquirer could cause some problems with another software like Jupyter that also uses the latest promt-toolkit staff. 
 
 The Jupyter version uses Jupyter notebook environment instead and provides interacting via **ipywidgets** library.
-
+***
 ### Error management
 The program uses a try/except system to catch the most part of possible errors (they usually occur during input).
 ![Error management](/images/3.png)
-
+***
 ### Code style
 The code is written according to the [PEP 8 style guide](https://www.python.org/dev/peps/pep-0008/) and checked using [Pylint](https://www.pylint.org/).
-
+***
 ### Enjoy!
