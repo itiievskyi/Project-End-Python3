@@ -97,7 +97,7 @@ def get_holidays(country, state_prov, years):
 
     return holydays_list
 
-def get_end_date(start_date, proj_days, holidays_schedule):
+def get_end_date(start_date, proj_days, holidays_schedule, observe):
     '''
     Calculates the end date of the project based on start date, duration and
     considering that people don't work on weekends and holidays
@@ -106,6 +106,7 @@ def get_end_date(start_date, proj_days, holidays_schedule):
     current_date = datetime.datetime.strptime(start_date, '%Y-%m-%d')
     weekend_days = 0
     holiday_days = 0
+    days_to_observe = 0
 
     if proj_days > 0:
 
@@ -117,12 +118,17 @@ def get_end_date(start_date, proj_days, holidays_schedule):
         while days_to_add > 0:
             current_date += datetime.timedelta(days=1)
             weekday = current_date.weekday()
+            # Checking if the the day falls on weekend
             if weekday >= 5:
                 weekend_days += 1
-                if current_date in holidays_schedule:
+                if observe and current_date in holidays_schedule:
                     holiday_days += 1
-                    current_date += datetime.timedelta(days=1)
+                    days_to_observe += 1
                 continue
+            elif days_to_observe > 0:
+                days_to_observe -= 1
+                continue
+            # Checking if the day doesn't fall on weekend but it's a holiday
             if current_date in holidays_schedule:
                 holiday_days += 1
                 continue
@@ -149,65 +155,82 @@ def get_start_date():
         except ValueError:
             print('Error! Invalid date format. Please use YYYY-MM-DD notation.')
             continue
+        except TypeError:
+            return 'interrupt'
 
-def get_devs_and_tasks():
+def get_front_end_data():
     '''
-    Asks user for number of developers and the amount of work to do
+    Asks user for number of front-end developers and the amount of work to do
     '''
-    dev_and_tasks = {}
+    front_end_data = {}
     # Getting the number of front-end developers
     while True:
         try:
-            dev_and_tasks['fe_devs'] = int(questionary.text(
+            front_end_data['fe_devs'] = int(questionary.text(
                 'Number of front-end developers:').ask())
-            if dev_and_tasks['fe_devs'] < 0:
+            if front_end_data['fe_devs'] < 0:
                 print('Error! You can\'t use negative numbers')
                 continue
             break
         except ValueError:
             print('Error! Please type a valid number')
             continue
+        except TypeError:
+            return {-1:-1}
 
     # Getting the number of working hours required to finish all front-end tasks
     while True:
         try:
-            dev_and_tasks['fe_task'] = int(questionary.text(
+            front_end_data['fe_task'] = int(questionary.text(
                 'Hours required for front-end tasks:').ask())
-            if dev_and_tasks['fe_task'] < 0:
+            if front_end_data['fe_task'] < 0:
                 print('Error! You can\'t use negative numbers')
                 continue
             break
         except ValueError:
             print('Error! Please type a valid number')
             continue
+        except TypeError:
+            return {-1:-1}
 
+    return front_end_data
+
+def get_back_end_data():
+    '''
+    Asks user for number of back-end developers and the amount of work to do
+    '''
+    back_end_data = {}
     # Getting the number of back-end developers
     while True:
         try:
-            dev_and_tasks['be_devs'] = int(questionary.text(
+            back_end_data['be_devs'] = int(questionary.text(
                 'Number of back-end developers:').ask())
-            if dev_and_tasks['be_devs'] < 0:
+            if back_end_data['be_devs'] < 0:
                 print('Error! You can\'t use negative numbers')
                 continue
             break
         except ValueError:
             print('Error! Please type a valid number')
             continue
+        except TypeError:
+            return {-1:-1}
 
     # Getting the number of working hours required to finish all back-end tasks
     while True:
         try:
-            dev_and_tasks['be_task'] = int(questionary.text(
+            back_end_data['be_task'] = int(questionary.text(
                 'Hours required for back-end tasks:').ask())
-            if dev_and_tasks['be_task'] < 0:
+            if back_end_data['be_task'] < 0:
                 print('Error! You can\'t use negative numbers')
                 continue
             break
         except ValueError:
             print('Error! Please type a valid number')
             continue
+        except TypeError:
+            return {-1:-1}
 
-    return dev_and_tasks
+    return back_end_data
 
 def get_projects_conditions():
     '''
@@ -217,15 +240,25 @@ def get_projects_conditions():
 
     # Getting the start date and number of developers / task hours
     input_data['start_date'] = get_start_date()
-    input_data.update(get_devs_and_tasks())
+    if input_data['start_date'] == 'interrupt':
+        return -1
+    input_data.update(get_front_end_data())
+    if -1 in input_data.keys():
+        return -1
+    input_data.update(get_back_end_data())
+    if -1 in input_data.keys():
+        return -1
 
     # GETTING ADDITIONAL INFORMATION
 
     # Getting the country
-    input_data['country'] = questionary.select(
-        'Select a country where the company operates:',
-        choices=COUNTRIES
-    ).ask().replace(' ', '')
+    try:
+        input_data['country'] = questionary.select(
+            'Select a country where the company operates:',
+            choices=COUNTRIES
+        ).ask().replace(' ', '')
+    except AttributeError:
+        return -1
 
     # Checking whether states or provinces are available for selected country
     # and getting the appropriate user choice
@@ -245,14 +278,29 @@ def get_projects_conditions():
     else:
         input_data['state_prov'] = ''
 
+    # Asking user about observation
+    input_data['observe'] = questionary.confirm(
+        'Should holidays falling on weekend observe the next working day?'
+    ).ask()
+
     return input_data
 
 def main():
     '''
     The main function that calls all other ones and collect all the data
     '''
+
     # Getting user input to store it in the dictionary and pass to the handler
-    setup = get_projects_conditions()
+    # Checking for pressed Ctrl+D
+    try:
+        setup = get_projects_conditions()
+    except EOFError:
+        print('An error occured. Try again and use Enter to finish the input.')
+        return
+
+    if setup == -1:
+        print('An error occured during input. The program was stopped.')
+        return
 
     # Calculating the project duration in days
     proj_days = calculate_project_duration(
@@ -282,11 +330,12 @@ def main():
     end_date = get_end_date(
         setup['start_date'],
         proj_days,
-        holidays_schedule
+        holidays_schedule,
+        setup['observe']
     )
 
     print(f'The estimated end date of the project is: {end_date["date"]}.')
-    print(f'There will be {end_date["weekends"]} weekend day(s) and ',
+    print(f'There will be {end_date["weekends"]} weekend day(s) and',
           f'{end_date["holidays"]} holiday(s) during the working period.')
 
 if __name__ == '__main__':
