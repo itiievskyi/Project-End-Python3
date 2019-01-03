@@ -53,7 +53,7 @@ I discovered a few popular APIs for getting national holidays and found the next
 * The most of them have a gaps on national holidays schedule (for example, [CalendarIndex](https://www.calendarindex.com/) doesn't provide information about catholic Christmass in Ukraine despite the fact that it was already celebrated twice here).
 * Some APIs (for example, [HolidayApi](https://holidayapi.com/)) allow only simple requests and their Python libraries are no longer updated.
 
-[Holidays](https://pypi.org/project/holidays/) package is permanently developing and provide an information about holidays in bunch of countries and provinces:
+[Holidays](https://pypi.org/project/holidays/) package is permanently developing and provides an information about holidays in bunch of countries and provinces:
 
 Country            |Abbr    |Provinces/States Available
 -------------------|--------|-------------------------------------------------------------
