@@ -80,12 +80,12 @@ Italy              |IT      |prov = MI, RM
 Japan              |JP      |None
 Mexico             |MX      |None
 Netherlands        |NL      |None
-NewZealand         |NZ      |prov = NTL, AUK, TKI, HKB, WGN, MBH, NSN, CAN, STC, WTL, OTA, STL, CIT
+New Zealand        |NZ      |prov = NTL, AUK, TKI, HKB, WGN, MBH, NSN, CAN, STC, WTL, OTA, STL, CIT
 Northern Ireland   |        |None
 Norway             |NO      |None
 Polish             |PL      |None
 Portugal           |PT      |None
-PortugalExt        |PTE     |*Portugal plus extended days most people have off*
+Portugal Ext       |PTE     |*Portugal plus extended days most people have off*
 Scotland           |        |None
 Slovenia           |SI      |None
 Slovakia           |SK      |None
@@ -94,8 +94,8 @@ Spain              |ES      |prov = AND, ARG, AST, CAN, CAM, CAL, CAT, CVA, EXT,
 Sweden             |SE      |None
 Switzerland        |CH      |prov = AG, AR, AI, BL, BS, BE, FR, GE, GL, GR, JU, LU, NE, NW, OW, SG, SH, SZ, SO, TG, TI, UR, VD, VS, ZG, ZH
 Ukraine            |UA      |None
-UnitedKingdom      |UK      |None
-UnitedStates       |US      |state = AL, AK, AS, AZ, AR, CA, CO, CT, DE, DC, FL, GA, GU, HI, ID, IL, IN, IA, KS, KY, LA, ME, MD, MH, MA, MI, FM, MN, MS, MO, MT, NE, NV, NH, NJ, NM, NY, NC, ND, MP, OH, OK, OR, PW, PA, PR, RI, SC, SD, TN, TX, UT, VT, VA, VI, WA, WV, WI, WY
+United Kingdom     |UK      |None
+United States      |US      |state = AL, AK, AS, AZ, AR, CA, CO, CT, DE, DC, FL, GA, GU, HI, ID, IL, IN, IA, KS, KY, LA, ME, MD, MH, MA, MI, FM, MN, MS, MO, MT, NE, NV, NH, NJ, NM, NY, NC, ND, MP, OH, OK, OR, PW, PA, PR, RI, SC, SD, TN, TX, UT, VT, VA, VI, WA, WV, WI, WY
 Wales              |        |None
 
 ### Interface
