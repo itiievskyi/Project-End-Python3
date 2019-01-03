@@ -290,54 +290,69 @@ def main():
     The main function that calls all other ones and collect all the data
     '''
 
-    # Getting user input to store it in the dictionary and pass to the handler
-    # Checking for pressed Ctrl+D
-    try:
-        setup = get_projects_conditions()
-    except EOFError:
-        print('An error occured. Try again and use Enter to finish the input.')
-        return
+    # The main loop
+    while True:
+        # Getting user input and checking for pressed Ctrl+D
+        try:
+            setup = get_projects_conditions()
+        except EOFError:
+            print('An error occured. Try again. Use Enter to finish the input.')
+            return
 
-    if setup == -1:
-        print('An error occured during input. The program was stopped.')
-        return
+        if setup == -1:
+            print('An error occured during input. The program was stopped.')
+            return
 
-    # Calculating the project duration in days
-    proj_days = calculate_project_duration(
-        setup['fe_devs'],
-        setup['fe_task'],
-        setup['be_devs'],
-        setup['be_task']
-    )
+        # Calculating the project duration in days
+        proj_days = calculate_project_duration(
+            setup['fe_devs'],
+            setup['fe_task'],
+            setup['be_devs'],
+            setup['be_task']
+        )
 
-    if proj_days == -1:
-        print('Please try again.')
-        return
+        if proj_days == -1:
+            print('Please try again.')
+            return
 
-    # Parsing the starting year from the project start date
-    min_year = int(strptime(setup['start_date'], '%Y-%m-%d').tm_year)
-    # Calculating the max project year based on project duration
-    max_year = int(min_year + (proj_days / 260) + 1)
+        # Parsing the starting year from the project start date
+        min_year = int(strptime(setup['start_date'], '%Y-%m-%d').tm_year)
+        # Calculating the max project year based on project duration
+        max_year = int(min_year + (proj_days / 260) + 1)
 
-    # Getting the list (dict) of public holidays for specific region and years
-    holidays_schedule = get_holidays(
-        setup['country'],
-        setup['state_prov'],
-        [y for y in range(min_year, max_year)]
-    )
+        # Getting the list (dict) of public holidays for specific region and years
+        holidays_schedule = get_holidays(
+            setup['country'],
+            setup['state_prov'],
+            [y for y in range(min_year, max_year)]
+        )
 
-    # Getting the end date of the project along with non-working days stats
-    end_date = get_end_date(
-        setup['start_date'],
-        proj_days,
-        holidays_schedule,
-        setup['observe']
-    )
+        # Getting the end date of the project along with non-working days stats
+        end_date = get_end_date(
+            setup['start_date'],
+            proj_days,
+            holidays_schedule,
+            setup['observe']
+        )
 
-    print(f'Developers need {proj_days} working day(s) to finish the job.')
-    print(f'The estimated end date of the project is: {end_date["date"]}.')
-    print(f'There will be {end_date["weekends"]} weekend day(s) and',
-          f'{end_date["holidays"]} holiday(s) during the working period.')
+        # Printing the result
+        print(f'Developers need {proj_days} working day(s) to finish the job.')
+        print(f'The estimated end date of the project is: {end_date["date"]}.')
+        print(f'There will be {end_date["weekends"]} weekend day(s) and',
+              f'{end_date["holidays"]} holiday(s) during the working period.')
+
+        # Asking user whether he wants to calculate end date of another project
+        try:
+            repeat = questionary.confirm(
+                'Would you like to calculate the end date of another project?'
+            ).ask()
+            if repeat:
+                continue
+            else:
+                break
+        except EOFError:
+            print('An error occured. Try again. Use Enter to finish the input.')
+            return
 
 if __name__ == '__main__':
     main()
