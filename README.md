@@ -23,13 +23,20 @@ You just input the required data - and get the result:
 
 *For Windows OS you should probably use another path and commands depend on virtual environment you have*
 
-### Holiday observation:
-In many countries, if the holiday falls on weekend, it will observe the next working day (it's usually Monday). But if you don't want to use this option (maybe your corporate rules provide another rule for this case) just type 'n' when the question about observation (*'Should holidays falling on weekend observe the next working day?'*) appears.
+### Main questions
+   * **Starting date of project** - type the date when you're going to start the project (or when it started). Use only `YYYY-MM-DD` notation so if the projects starts on January, 20th 2019, type 2019-01-20. This date will be the first day when developers work on project (in case if it's not a holiday and doesn't fall on weekend).
+   * **Number of front-end developers** - the number of developers that will work on this project (assuming that nobody will leave or meet the team).
+   * **Hours required for front-end tasks** - estimated amount of hours required in order to finish all front-end tasks. This number should represent the overall hours (regardless of the number of developers).
+   * **Number of back-end developers** , **Hours required for back-end tasks** - see the previos instructions.
+   * **Select a country where the company operates** - use the arrow keys and Enter to choose the country for which public holidays should be found. Look at the table below to see the full list of supported countries. 
 
-### Choosing a province or state:
+### Choosing a province or state
 Depend on country you have chosen the program can also propose you to choose a state or province.
 ![image #2](/images/2.png)
-If you pressed 'Y' but no longer want to choose, just pick the '-NONE-' to pass a default value to the main algorithm. Default value may be either the exact province or the whole country without special regional holidays. Look at the table below to see the full list of supported countries and provinces.
+If you pressed 'Y' but no longer want to choose, just pick the '-NONE-' to pass a default value to the main algorithm. Default value may be either the exact province or the whole country without special regional holidays. Look at the table below to see the full list of supported provinces.
+
+### Holiday observation
+In many countries, if the holiday falls on weekend, it will observe the next working day (it's usually Monday). But if you don't want to use this option (maybe your corporate rules provide another rule for this case) just type 'n' when the question about observation (*'Should holidays falling on weekend observe the next working day?'*) appears.
 
 ## Developer notes
 
