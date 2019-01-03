@@ -52,7 +52,7 @@ If you pressed 'Y' but no longer want to choose, just pick the '-NONE-' to pass 
 In many countries, if the holiday falls on weekend, it will observe the next working day (it's usually Monday). But if you don't want to use this option (maybe your corporate rules provide another rule for this case) just type 'n' when the question about observation (*'Should holidays falling on weekend observe the next working day?'*) appears.
 ***
 ## Developer notes
-***
+
 ### What technologies or libraries does this project use?
 In the core of the project are:
 * Python 3
@@ -125,6 +125,6 @@ The program uses a try/except system to catch the most part of possible errors (
 ![Error management](/images/3.png)
 ***
 ### Code style
-The code is written according to the [PEP 8 style guide](https://www.python.org/dev/peps/pep-0008/) and checked using [Pylint](https://www.pylint.org/).
+The code (*project_end.py*) is written according to the [PEP 8 style guide](https://www.python.org/dev/peps/pep-0008/) and checked using [Pylint](https://www.pylint.org/).
 ***
 ### Enjoy!
